@@ -53,7 +53,7 @@
                     <tr>
                         <td>{{ kod }}</td>
                         <td>{{ veri['alis'] }}</td>
-                        <td>{{ veri['satis'] }}</td>
+                        <td class="satis">{{ veri['satis'] }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -75,7 +75,7 @@
                     <tr>
                         <td>{{ kod }}</td>
                         <td>{{ veri['alis'] }}</td>
-                        <td>{{ veri['satis'] }}</td>
+                        <td class="satis">{{ veri['satis'] }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -112,6 +112,13 @@
                 row.appendChild(kodCell);
                 row.appendChild(alisCell);
                 row.appendChild(satisCell);
+
+                // Satış fiyatını karşılaştırarak rengini belirle
+                if (veri.satis > veri.alis) {
+                    satisCell.style.color = 'red'; // Artan değerlerin rengini kırmızı yap
+                } else if (veri.satis < veri.alis) {
+                    satisCell.style.color = 'green'; // Düşen değerlerin rengini yeşil yap
+                }
 
                 tbody.appendChild(row);
             }
