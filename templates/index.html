@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Döviz ve Altın</title>
+    <style>
+        body {
+            background-color: #222;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .table-container {
+            width: 49%;
+            margin-bottom: 10px;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: #444;
+            color: #fff;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        
+        th {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="table-container">
+            <h1>Dövizler</h1>
+            <table id="doviz-table">
+                <thead>
+                    <tr>
+                        <th>Kod</th>
+                        <th>Alış</th>
+                        <th>Satış</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for kod, veri in dovizler.items() %}
+                    <tr>
+                        <td>{{ kod }}</td>
+                        <td>{{ veri['alis'] }}</td>
+                        <td>{{ veri['satis'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="table-container">
+            <h1>Altınlar</h1>
+            <table id="altin-table">
+                <thead>
+                    <tr>
+                        <th>Kod</th>
+                        <th>Alış</th>
+                        <th>Satış</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for kod, veri in altinlar.items() %}
+                    <tr>
+                        <td>{{ kod }}</td>
+                        <td>{{ veri['alis'] }}</td>
+                        <td>{{ veri['satis'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function updateTables() {
+            fetch('/update')
+                .then(response => response.json())
+                .then(data => {
+                    updateTable('doviz-table', data.dovizler);
+                    updateTable('altin-table', data.altinlar);
+                })
+                .catch(error => console.log(error));
+        }
+
+        function updateTable(tableId, data) {
+            const table = document.getElementById(tableId);
+            const tbody = table.getElementsByTagName('tbody')[0];
+            tbody.innerHTML = '';
+
+            for (const [kod, veri] of Object.entries(data)) {
+                const row = document.createElement('tr');
+                const kodCell = document.createElement('td');
+                const alisCell = document.createElement('td');
+                const satisCell = document.createElement('td');
+
+                kodCell.innerText = kod;
+                alisCell.innerText = veri.alis;
+                satisCell.innerText = veri.satis;
+
+                row.appendChild(kodCell);
+                row.appendChild(alisCell);
+                row.appendChild(satisCell);
+
+                tbody.appendChild(row);
+            }
+        }
+
+        setInterval(updateTables, 1000);
+    </script>
+</body>
+</html>
