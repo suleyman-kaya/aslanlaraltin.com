@@ -43,10 +43,11 @@ def VerileriCek()->dict:
         result = json.loads(data.decode(encoding))
 
         result = result["data"]
-        
+
         # Alış ve satış değerlerini float'a dönüştürme
-        result["alis"] = float(result["alis"])
-        result["satis"] = float(result["satis"])
+        for deger in result:
+            result[deger]["alis"] = float(result[deger]["alis"])
+            result[deger]["satis"] = float(result[deger]["satis"])
     
     return result
 
@@ -71,3 +72,20 @@ def Verileri_Gruplara_Ayir(veri_kumesi:dict) -> set:
         altin_listesi[eleman] = veri_kumesi[eleman]
 
     return (doviz_listesi, altin_listesi)
+
+
+
+
+def IstenenVeriyeKarEkle(tablo:dict, veri:str, alisa_mi_satisa_mi:str, eklenecek_kar_oranı:float) -> dict:
+    """
+    Inputs:
+        tablo: Tüm fiyatların tablosu
+        veri: Kar oranının ekleneceği veri
+        alisa_mi_satisa_mi: Kar alışa mı eklenecek satışa mı?
+        eklenecek_kar_oranı: Yüzde kaç kar eklenecek
+    
+    Outputs:
+        Seçilen verinin alış ya da satışına kar eklenmiş şekilde güncellenen tablo
+    """
+    tablo[veri][alisa_mi_satisa_mi]= tablo[veri][alisa_mi_satisa_mi] + (tablo[veri][alisa_mi_satisa_mi] * (eklenecek_kar_oranı/100))
+    return tablo
