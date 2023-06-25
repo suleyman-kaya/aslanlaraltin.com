@@ -43,6 +43,10 @@ def VerileriCek()->dict:
         result = json.loads(data.decode(encoding))
 
         result = result["data"]
+        
+        # Alış ve satış değerlerini float'a dönüştürme
+        result["alis"] = float(result["alis"])
+        result["satis"] = float(result["satis"])
     
     return result
 
