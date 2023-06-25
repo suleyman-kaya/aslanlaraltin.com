@@ -1,9 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Yönetici</title>
+  <title>Giriş Sayfası</title>
+  <script>
+    function login() {
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+
+      if (username === "aslanlaraltin68**//--" && password === "güvenlişifre") {
+        alert("Giriş Başarılı!");
+        showAdminPage(); // Yönetici sayfasını görüntüleyen fonksiyon
+      } else {
+        alert("Kullanıcı adı veya şifre hatalı!");
+      }
+    }
+
+    function showAdminPage() {
+      document.getElementById("adminPage").style.display = "block";
+    }
+  </script>
+  <style>
+    #adminPage {
+      display: none;
+    }
+  </style>
 </head>
 <body>
+  <h1>Giriş Sayfası</h1>
+  <form>
+    <label for="username">Kullanıcı Adı:</label>
+    <input type="text" id="username" required><br><br>
+
+    <label for="password">Şifre:</label>
+    <input type="password" id="password" required><br><br>
+
+    <input type="button" value="Giriş Yap" onclick="login()">
+  </form>
+
+  <div id="adminPage">
     <h1>Yönetici Sayfası</h1>
 
     <form id="karForm">
@@ -53,5 +87,7 @@
             });
         });
     </script>
+  </div>
 </body>
 </html>
+
