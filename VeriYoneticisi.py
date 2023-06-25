@@ -89,3 +89,149 @@ def IstenenVeriyeKarEkle(tablo:dict, veri:str, alisa_mi_satisa_mi:str, eklenecek
     """
     tablo[veri][alisa_mi_satisa_mi]= tablo[veri][alisa_mi_satisa_mi] + (tablo[veri][alisa_mi_satisa_mi] * (eklenecek_kar_oranı/100))
     return tablo
+
+
+
+
+global kar_listesi
+kar_listesi = {
+    "USDTRY": {
+        "alisa_eklenecek_kar_orani": 0,
+        "satisa_eklenecek_kar_orani": 0
+    },
+    "EURTRY": {
+        "alisa_eklenecek_kar_orani": 0,
+        "satisa_eklenecek_kar_orani": 0
+    },
+    "GBPTRY": {
+        "alisa_eklenecek_kar_orani": 0,
+        "satisa_eklenecek_kar_orani": 0
+    },
+    "SEKTRY": {
+        "alisa_eklenecek_kar_orani": 0,
+        "satisa_eklenecek_kar_orani": 0
+    },
+    "NOKTRY": {
+        "alisa_eklenecek_kar_orani": 0,
+        "satisa_eklenecek_kar_orani": 0
+    },
+    "CHFTRY": {
+        "alisa_eklenecek_kar_orani": 0,
+        "satisa_eklenecek_kar_orani": 0
+    },
+    "AUDTRY": {
+        "alisa_eklenecek_kar_orani": 0,
+        "satisa_eklenecek_kar_orani": 0
+    },
+    "JODTRY": {
+        "alisa_eklenecek_kar_orani": 0,
+        "satisa_eklenecek_kar_orani": 0
+    },
+    "CADTRY": {
+        "alisa_eklenecek_kar_orani": 0,
+        "satisa_eklenecek_kar_orani": 0
+    },
+    "OMRTRY": {
+        "alisa_eklenecek_kar_orani": 0,
+        "satisa_eklenecek_kar_orani": 0
+    },
+    "SARTRY": {
+        "alisa_eklenecek_kar_orani": 0,
+        "satisa_eklenecek_kar_orani": 0
+    },
+    "AEDTRY": {
+        "alisa_eklenecek_kar_orani": 0,
+        "satisa_eklenecek_kar_orani": 0
+    },
+    "QARTRY": {
+        "alisa_eklenecek_kar_orani": 0,
+        "satisa_eklenecek_kar_orani": 0
+    },
+    "KWDTRY": {
+        "alisa_eklenecek_kar_orani": 0,
+        "satisa_eklenecek_kar_orani": 0
+    },
+    "ILSTRY": {
+        "alisa_eklenecek_kar_orani": 0,
+        "satisa_eklenecek_kar_orani": 0
+    },
+    "MADTRY": {
+        "alisa_eklenecek_kar_orani": 0,
+        "satisa_eklenecek_kar_orani": 0
+    },
+    "ALTIN": {
+        "alisa_eklenecek_kar_orani": 0,
+        "satisa_eklenecek_kar_orani": 0
+    },
+    "AYAR14": {
+        "alisa_eklenecek_kar_orani": 0,
+        "satisa_eklenecek_kar_orani": 0
+    },
+    "AYAR22": {
+        "alisa_eklenecek_kar_orani": 0,
+        "satisa_eklenecek_kar_orani": 0
+    },
+    "KULCEALTIN": {
+        "alisa_eklenecek_kar_orani": 0,
+        "satisa_eklenecek_kar_orani": 0
+    },
+    "CEYREK_YENI": {
+        "alisa_eklenecek_kar_orani": 0,
+        "satisa_eklenecek_kar_orani": 0
+    },
+    "CEYREK_ESKI": {
+        "alisa_eklenecek_kar_orani": 0,
+        "satisa_eklenecek_kar_orani": 0
+    },
+    "YARIM_YENI": {
+        "alisa_eklenecek_kar_orani": 0,
+        "satisa_eklenecek_kar_orani": 0
+    },
+    "YARIM_ESKI": {
+        "alisa_eklenecek_kar_orani": 0,
+        "satisa_eklenecek_kar_orani": 0
+    },
+    "TEK_YENI": {
+        "alisa_eklenecek_kar_orani": 0,
+        "satisa_eklenecek_kar_orani": 0
+    },
+    "TEK_ESKI": {
+        "alisa_eklenecek_kar_orani": 0,
+        "satisa_eklenecek_kar_orani": 0
+    },
+    "ATA_YENI": {
+        "alisa_eklenecek_kar_orani": 0,
+        "satisa_eklenecek_kar_orani": 0
+    },
+    "ATA_ESKI": {
+        "alisa_eklenecek_kar_orani": 0,
+        "satisa_eklenecek_kar_orani": 0
+    },
+    "ATA5_YENI": {
+        "alisa_eklenecek_kar_orani": 0,
+        "satisa_eklenecek_kar_orani": 0
+    },
+    "ATA5_ESKI": {
+        "alisa_eklenecek_kar_orani": 0,
+        "satisa_eklenecek_kar_orani": 0
+    },
+    "GREMESE_YENI": {
+        "alisa_eklenecek_kar_orani": 0,
+        "satisa_eklenecek_kar_orani": 0
+    },
+    "GREMESE_ESKI": {
+        "alisa_eklenecek_kar_orani": 0,
+        "satisa_eklenecek_kar_orani": 0
+    }
+}
+
+
+
+
+def TabloyaKarEkle(orijinal_veri_tablosu:dict, kar_listesi:dict) -> dict:
+    orijinal_veri_tablosu_kopya = orijinal_veri_tablosu.copy()
+    for eleman in kar_listesi.keys():
+        orijinal_veri_tablosu_kopya[eleman]["satis"] += (orijinal_veri_tablosu_kopya[eleman]["satis"] * kar_listesi[eleman]["satisa_eklenecek_kar_orani"]/100)
+        orijinal_veri_tablosu_kopya[eleman]["alis"] += (orijinal_veri_tablosu_kopya[eleman]["alis"] * kar_listesi[eleman]["alisa_eklenecek_kar_orani"]/100)
+
+    return orijinal_veri_tablosu_kopya
