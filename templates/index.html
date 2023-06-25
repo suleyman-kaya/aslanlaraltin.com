@@ -206,8 +206,8 @@
             const altinHeader = document.querySelector('#altin-table h1');
 
             body.classList.toggle('dark-mode');
-            dovizHeader.innerText = body.classList.contains('dark-mode') ? 'Dövizler (Dark Mode)' : 'Dövizler';
-            altinHeader.innerText = body.classList.contains('dark-mode') ? 'Altınlar (Dark Mode)' : 'Altınlar';
+            dovizHeader.innerText = body.classList.contains('dark-mode') ? 'Dövizler' : 'Dövizler';
+            altinHeader.innerText = body.classList.contains('dark-mode') ? 'Altınlar' : 'Altınlar';
         }
 
         setInterval(updateTables, 1000);
