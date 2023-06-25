@@ -9,6 +9,12 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark-mode {
+            background-color: #222;
+            color: #fff;
         }
 
         .container {
@@ -30,6 +36,7 @@
             background-color: #fff;
             color: #333;
             border-radius: 6px;
+            transition: background-color 0.3s ease;
         }
         
         th, td {
@@ -49,18 +56,62 @@
             font-size: 24px;
             margin-bottom: 16px;
             color: #555;
+            transition: color 0.3s ease;
         }
 
         .satis {
             font-weight: bold;
+            transition: color 0.3s ease;
         }
         
         .satis.increase {
-            color: #e74c3c;
+            color: #27ae60;
         }
         
         .satis.decrease {
-            color: #27ae60;
+            color: #e74c3c;
+        }
+
+        .dark-mode-toggle {
+            background-color: transparent;
+            border: none;
+            color: inherit;
+            cursor: pointer;
+            font-size: 16px;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+
+        .dark-mode-toggle:focus {
+            outline: none;
+        }
+
+        .dark-mode-toggle:hover {
+            opacity: 0.7;
+        }
+
+        body.dark-mode table {
+            background-color: #333;
+            color: #fff;
+        }
+
+        body.dark-mode th {
+            background-color: #444;
+            color: #fff;
+        }
+
+        body.dark-mode .satis.increase {
+            color: #9effa7;
+        }
+
+        body.dark-mode .satis.decrease {
+            color: #ff7f7f;
+        }
+
+        body.dark-mode h1 {
+            color: #ddd;
         }
     </style>
 </head>
@@ -111,6 +162,8 @@
         </div>
     </div>
 
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()">&#9790; Dark Mode</button>
+
     <script>
         function updateTables() {
             fetch('/update')
@@ -125,31 +178,36 @@
         function updateTable(tableId, data) {
             const table = document.getElementById(tableId);
             const tbody = table.getElementsByTagName('tbody')[0];
-            tbody.innerHTML = '';
+            const rows = tbody.getElementsByTagName('tr');
 
-            for (const [kod, veri] of Object.entries(data)) {
-                const row = document.createElement('tr');
-                const kodCell = document.createElement('td');
-                const alisCell = document.createElement('td');
-                const satisCell = document.createElement('td');
+            for (const row of rows) {
+                const satisCell = row.getElementsByClassName('satis')[0];
+                const kod = row.cells[0].innerText;
+                const veri = data[kod];
 
-                kodCell.innerText = kod;
-                alisCell.innerText = veri.alis;
-                satisCell.innerText = veri.satis;
+                const previousValue = parseFloat(satisCell.dataset.previousValue);
+                const currentValue = parseFloat(veri.satis);
 
-                row.appendChild(kodCell);
-                row.appendChild(alisCell);
-                row.appendChild(satisCell);
-
-                // Satış fiyatını karşılaştırarak rengini belirle
-                if (veri.satis > veri.alis) {
-                    satisCell.classList.add('increase'); // Artan değerlerin rengini kırmızı yap
-                } else if (veri.satis < veri.alis) {
-                    satisCell.classList.add('decrease'); // Düşen değerlerin rengini yeşil yap
+                if (previousValue && previousValue !== currentValue) {
+                    satisCell.classList.add(currentValue > previousValue ? 'increase' : 'decrease');
+                    setTimeout(() => {
+                        satisCell.classList.remove('increase', 'decrease');
+                    }, 1000);
                 }
 
-                tbody.appendChild(row);
+                satisCell.innerText = veri.satis;
+                satisCell.dataset.previousValue = veri.satis;
             }
+        }
+
+        function toggleDarkMode() {
+            const body = document.body;
+            const dovizHeader = document.querySelector('#doviz-table h1');
+            const altinHeader = document.querySelector('#altin-table h1');
+
+            body.classList.toggle('dark-mode');
+            dovizHeader.innerText = body.classList.contains('dark-mode') ? 'Dövizler (Dark Mode)' : 'Dövizler';
+            altinHeader.innerText = body.classList.contains('dark-mode') ? 'Altınlar (Dark Mode)' : 'Altınlar';
         }
 
         setInterval(updateTables, 1000);
