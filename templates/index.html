@@ -10,6 +10,7 @@
             margin: 0;
             padding: 0;
             transition: background-color 0.3s ease, color 0.3s ease;
+            position: relative;
         }
 
         body.dark-mode {
@@ -53,10 +54,19 @@
         }
 
         h1 {
+            font-size: 64px;
+            margin-bottom: 16px;
+            color: #555;
+            transition: color 0.3s ease;
+            text-align: center;
+        }
+
+        h2 {
             font-size: 24px;
             margin-bottom: 16px;
             color: #555;
             transition: color 0.3s ease;
+            text-align: center;
         }
 
         .satis {
@@ -113,13 +123,32 @@
         body.dark-mode h1 {
             color: #ddd;
         }
+
+        body.dark-mode h2 {
+            color: #ddd;
+        }
+
+        #clock {
+            font-size: 24px;
+            margin-bottom: 16px;
+            color: #555;
+            transition: color 0.3s ease;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        body.dark-mode #clock {
+            color: #ddd;
+        }
     </style>
 </head>
 <body>
+    <h1>Aslanlar Altın</h1>
     <div class="container">
         <div class="table-container">
-            <h1>Dövizler</h1>
             <table id="doviz-table">
+                <h2>Dövizler</h2>
                 <thead>
                     <tr>
                         <th>Kod</th>
@@ -140,8 +169,8 @@
         </div>
         
         <div class="table-container">
-            <h1>Altınlar</h1>
             <table id="altin-table">
+                <h2>Altınlar</h2>
                 <thead>
                     <tr>
                         <th>Kod</th>
@@ -163,6 +192,8 @@
     </div>
 
     <button class="dark-mode-toggle" onclick="toggleDarkMode()">&#9790; Dark Mode</button>
+
+    <div id="clock"></div>
 
     <script>
         function updateTables() {
@@ -202,16 +233,30 @@
 
         function toggleDarkMode() {
             const body = document.body;
-            const dovizHeader = document.querySelector('#doviz-table h1');
-            const altinHeader = document.querySelector('#altin-table h1');
+            const dovizHeader = document.querySelector('#doviz-table h2');
+            const altinHeader = document.querySelector('#altin-table h2');
+            const clock = document.getElementById('clock');
 
             body.classList.toggle('dark-mode');
             dovizHeader.innerText = body.classList.contains('dark-mode') ? 'Dövizler' : 'Dövizler';
             altinHeader.innerText = body.classList.contains('dark-mode') ? 'Altınlar' : 'Altınlar';
+            clock.classList.toggle('dark-mode');
         }
 
         setInterval(updateTables, 1000);
+
+        function updateTime() {
+            const clock = document.getElementById('clock');
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const time = `${hours}:${minutes}:${seconds}`;
+            clock.innerText = time;
+        }
+
+        updateTime();
+        setInterval(updateTime, 1000);
     </script>
 </body>
 </html>
-
