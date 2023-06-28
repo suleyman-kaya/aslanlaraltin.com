@@ -231,7 +231,7 @@ kar_listesi = {
 def TabloyaKarEkle(orijinal_veri_tablosu:dict, kar_listesi:dict) -> dict:
     orijinal_veri_tablosu_kopya = orijinal_veri_tablosu.copy()
     for eleman in kar_listesi.keys():
-        orijinal_veri_tablosu_kopya[eleman]["satis"] += (orijinal_veri_tablosu_kopya[eleman]["satis"] * kar_listesi[eleman]["satisa_eklenecek_kar_orani"]/100)
-        orijinal_veri_tablosu_kopya[eleman]["alis"] += (orijinal_veri_tablosu_kopya[eleman]["alis"] * kar_listesi[eleman]["alisa_eklenecek_kar_orani"]/100)
+        orijinal_veri_tablosu_kopya[eleman]["satis"] += kar_listesi[eleman]["satisa_eklenecek_kar_orani"]
+        orijinal_veri_tablosu_kopya[eleman]["alis"] += kar_listesi[eleman]["alisa_eklenecek_kar_orani"]
 
     return orijinal_veri_tablosu_kopya
