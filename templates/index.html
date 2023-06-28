@@ -69,6 +69,19 @@
             text-align: center;
         }
 
+        .alis {
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        
+        .alis.increase {
+            color: #27ae60;
+        }
+        
+        .alis.decrease {
+            color: #e74c3c;
+        }
+
         .satis {
             font-weight: bold;
             transition: color 0.3s ease;
@@ -119,6 +132,13 @@
         body.dark-mode .satis.decrease {
             color: #ff7f7f;
         }
+        body.dark-mode .alis.increase {
+            color: #9effa7;
+        }
+
+        body.dark-mode .alis.decrease {
+            color: #ff7f7f;
+        }
 
         body.dark-mode h1 {
             color: #ddd;
@@ -160,7 +180,7 @@
                     {% for kod, veri in dovizler.items() %}
                     <tr>
                         <td>{{ kod }}</td>
-                        <td>{{ veri['alis'] }}</td>
+                        <td class="alis">{{ veri['alis'] }}</td>
                         <td class="satis">{{ veri['satis'] }}</td>
                     </tr>
                     {% endfor %}
@@ -182,7 +202,7 @@
                     {% for kod, veri in altinlar.items() %}
                     <tr>
                         <td>{{ kod }}</td>
-                        <td>{{ veri['alis'] }}</td>
+                        <td class="alis">{{ veri['alis'] }}</td>
                         <td class="satis">{{ veri['satis'] }}</td>
                     </tr>
                     {% endfor %}
@@ -197,52 +217,52 @@
 
     <script>
         function updateTables() {
-            fetch('/update')
-                .then(response => response.json())
-                .then(data => {
-                    updateTable('doviz-table', data.dovizler);
-                    updateTable('altin-table', data.altinlar);
-                })
-                .catch(error => console.log(error));
+                    fetch('/update')
+                        .then(response => response.json())
+                        .then(data => {
+                            updateTable('doviz-table', data.dovizler);
+                            updateTable('altin-table', data.altinlar);
+                        })
+                        .catch(error => console.log(error));
         }
-
+            
         function updateTable(tableId, data) {
-    const table = document.getElementById(tableId);
-    const tbody = table.getElementsByTagName('tbody')[0];
-    const rows = tbody.getElementsByTagName('tr');
+            const table = document.getElementById(tableId);
+            const tbody = table.getElementsByTagName('tbody')[0];
+            const rows = tbody.getElementsByTagName('tr');
+                
+            for (const row of rows) {
+                const alisCell = row.cells[1];  // Get the 'alis' cell (second cell)
+                const satisCell = row.getElementsByClassName('satis')[0];
+                const kod = row.cells[0].innerText;
+                const veri = data[kod];
+            
+                const previousSatisValue = parseFloat(satisCell.dataset.previousValue);
+                const currentSatisValue = parseFloat(veri.satis);
+                const previousAlisValue = parseFloat(alisCell.dataset.previousValue);
+                const currentAlisValue = parseFloat(veri.alis);
+            
+                if (previousSatisValue && previousSatisValue !== currentSatisValue) {
+                    satisCell.classList.add(currentSatisValue > previousSatisValue ? 'increase' : 'decrease');
+                    setTimeout(() => {
+                        satisCell.classList.remove('increase', 'decrease');
+                    }, 1000);
+                }
+            
+                if (previousAlisValue && previousAlisValue !== currentAlisValue) {
+                    alisCell.classList.add(currentAlisValue > previousAlisValue ? 'increase' : 'decrease');
+                    setTimeout(() => {
+                        alisCell.classList.remove('increase', 'decrease');
+                    }, 1000);
+                }
+            
+                satisCell.innerText = veri.satis;
+                satisCell.dataset.previousValue = veri.satis;
 
-    for (const row of rows) {
-        const alisCell = row.cells[1];  // Get the 'alis' cell (second cell)
-        const satisCell = row.getElementsByClassName('satis')[0];
-        const kod = row.cells[0].innerText;
-        const veri = data[kod];
-
-        const previousSatisValue = parseFloat(satisCell.dataset.previousValue);
-        const currentSatisValue = parseFloat(veri.satis);
-        const previousAlisValue = parseFloat(alisCell.dataset.previousValue);
-        const currentAlisValue = parseFloat(veri.alis);
-
-        if (previousSatisValue && previousSatisValue !== currentSatisValue) {
-            satisCell.classList.add(currentSatisValue > previousSatisValue ? 'increase' : 'decrease');
-            setTimeout(() => {
-                satisCell.classList.remove('increase', 'decrease');
-            }, 1000);
+                alisCell.innerText = veri.alis;
+                alisCell.dataset.previousValue = veri.alis;
+            }
         }
-
-        if (previousAlisValue && previousAlisValue !== currentAlisValue) {
-            alisCell.classList.add(currentAlisValue > previousAlisValue ? 'increase' : 'decrease');
-            setTimeout(() => {
-                alisCell.classList.remove('increase', 'decrease');
-            }, 1000);
-        }
-
-        satisCell.innerText = veri.satis;
-        satisCell.dataset.previousValue = veri.satis;
-        
-        alisCell.innerText = veri.alis;
-        alisCell.dataset.previousValue = veri.alis;
-    }
-}
 
 
         function toggleDarkMode() {
@@ -257,6 +277,7 @@
             clock.classList.toggle('dark-mode');
         }
 
+        updateTables()
         setInterval(updateTables, 1000);
 
         function updateTime() {
