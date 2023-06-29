@@ -179,7 +179,7 @@
                 <tbody>
                     {% for kod, veri in dovizler.items() %}
                     <tr>
-                        <td>{{ kod }}</td>
+                        <td>{{ kod[:3] + '-' + kod[-3:] }}</td>
                         <td class="alis">{{ veri['alis'] }}</td>
                         <td class="satis">{{ veri['satis'] }}</td>
                     </tr>
