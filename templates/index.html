@@ -234,7 +234,7 @@
             for (const row of rows) {
                 const alisCell = row.cells[1];  // Get the 'alis' cell (second cell)
                 const satisCell = row.getElementsByClassName('satis')[0];
-                const kod = row.cells[0].innerText;
+                const kod = (tableId === "doviz-table") ? row.cells[0].innerText.substring(0, 3) + row.cells[0].innerText.substring(4) : row.cells[0].innerText;
                 const veri = data[kod];
             
                 const previousSatisValue = parseFloat(satisCell.dataset.previousValue);
