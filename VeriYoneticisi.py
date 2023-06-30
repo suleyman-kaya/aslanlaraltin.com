@@ -226,6 +226,9 @@ kar_listesi = {
         "satisa_eklenecek_kar_orani": 0
     }
 }
+filtreli_doviz_listesi = ['USDTRY', 'EURTRY', 'GBPTRY', 'CHFTRY', 'SARTRY', 'AUDTRY', 'CADTRY']
+filtreli_altin_listesi = ['ALTIN', 'AYAR14', 'AYAR22', 'KULCEALTIN', 'CEYREK_YENI', 'CEYREK_ESKI', 'YARIM_YENI', 'YARIM_ESKI', 'TEK_YENI', 'TEK_ESKI', 'GREMESE_YENI', 'GREMESE_ESKI']
+kar_listesi = {k: v for k, v in kar_listesi.items() if k in filtreli_doviz_listesi + filtreli_altin_listesi}
 
 
 
