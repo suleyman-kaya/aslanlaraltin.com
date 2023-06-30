@@ -69,6 +69,15 @@
             text-align: center;
         }
 
+        .gizli-th {
+            display: none;
+        }
+
+
+        .gizli-td {
+            display: none;
+        }
+
         .alis {
             font-weight: bold;
             transition: color 0.3s ease;
@@ -201,7 +210,7 @@
                 <tbody>
                     {% for kod, veri in altinlar.items() %}
                     <tr>
-                        <td>{{ kod }}</td>
+                        <td>{{ veri['code'] }}</td>
                         <td class="alis">{{ veri['alis'] }}</td>
                         <td class="satis">{{ veri['satis'] }}</td>
                     </tr>
@@ -220,13 +229,13 @@
                     fetch('/update')
                         .then(response => response.json())
                         .then(data => {
-                            updateTable('doviz-table', data.dovizler);
-                            updateTable('altin-table', data.altinlar);
+                            updateDovizTable('doviz-table', data.dovizler);
+                            updateAltinTable('altin-table', data.altinlar);
                         })
                         .catch(error => console.log(error));
         }
             
-        function updateTable(tableId, data) {
+        function updateDovizTable(tableId, data) {
             const table = document.getElementById(tableId);
             const tbody = table.getElementsByTagName('tbody')[0];
             const rows = tbody.getElementsByTagName('tr');
@@ -234,7 +243,7 @@
             for (const row of rows) {
                 const alisCell = row.cells[1];  // Get the 'alis' cell (second cell)
                 const satisCell = row.getElementsByClassName('satis')[0];
-                const kod = (tableId === "doviz-table") ? row.cells[0].innerText.substring(0, 3) + row.cells[0].innerText.substring(4) : row.cells[0].innerText;
+                const kod =row.cells[0].innerText.substring(0, 3) + row.cells[0].innerText.substring(4)
                 const veri = data[kod];
             
                 const previousSatisValue = parseFloat(satisCell.dataset.previousValue);
@@ -263,6 +272,76 @@
                 alisCell.dataset.previousValue = veri.alis;
             }
         }
+
+        function updateAltinTable(tableId, data) {
+              const table = document.getElementById(tableId);
+              const tbody = table.getElementsByTagName('tbody')[0];
+              const rows = tbody.getElementsByTagName('tr');
+                    
+              for (const row of rows) {
+                const alisCell = row.cells[1]; // Get the 'alis' cell (second cell)
+                const satisCell = row.getElementsByClassName('satis')[0];
+                let kod = row.cells[0].innerText;
+            
+                if (kod === 'HAS') {
+                  kod = 'ALTIN';
+                } else if (kod === '14 AYAR') {
+                  kod = 'AYAR14';
+                } else if (kod === '22 AYAR') {
+                  kod = 'AYAR22';
+                } else if (kod === 'GRAM ALTIN') {
+                  kod = 'KULCEALTIN';
+                } else if (kod === 'TAM YENİ') {
+                  kod = 'TEK_YENI';
+                } else if (kod === 'TAM ESKİ') {
+                  kod = 'TEK_ESKI';
+                } else if (kod === 'REŞAT') {
+                  kod = 'ATA_YENI';
+                } else if (kod === 'REŞAT 36') {
+                  kod = 'ATA5_YENI';
+                } else if (kod === 'ESKİ ÇEYREK') {
+                  kod = 'CEYREK_ESKI';
+                } else if (kod === 'YENİ ÇEYREK') {
+                  kod = 'CEYREK_YENI';
+                } else if (kod === 'ESKİ YARIM') {
+                  kod = 'YARIM_ESKI';
+                } else if (kod === 'YENİ YARIM') {
+                  kod = 'YARIM_YENI';
+                } else if (kod === 'ESKİ GREMESE') {
+                  kod = 'GREMESE_ESKI';
+                } else if (kod === 'YENİ GREMESE') {
+                  kod = 'GREMESE_YENI';
+                }
+            
+                const veri = data[kod];
+            
+                const previousSatisValue = parseFloat(satisCell.dataset.previousValue);
+                const currentSatisValue = parseFloat(veri.satis);
+                const previousAlisValue = parseFloat(alisCell.dataset.previousValue);
+                const currentAlisValue = parseFloat(veri.alis);
+            
+                if (previousSatisValue && previousSatisValue !== currentSatisValue) {
+                  satisCell.classList.add(currentSatisValue > previousSatisValue ? 'increase' : 'decrease');
+                  setTimeout(() => {
+                    satisCell.classList.remove('increase', 'decrease');
+                  }, 1000);
+                }
+            
+                if (previousAlisValue && previousAlisValue !== currentAlisValue) {
+                  alisCell.classList.add(currentAlisValue > previousAlisValue ? 'increase' : 'decrease');
+                  setTimeout(() => {
+                    alisCell.classList.remove('increase', 'decrease');
+                  }, 1000);
+                }
+            
+                satisCell.innerText = veri.satis;
+                satisCell.dataset.previousValue = veri.satis;
+            
+                alisCell.innerText = veri.alis;
+                alisCell.dataset.previousValue = veri.alis;
+              }
+        }
+
 
 
         function toggleDarkMode() {

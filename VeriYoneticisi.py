@@ -58,10 +58,12 @@ def Verileri_Gruplara_Ayir(veri_kumesi:dict) -> set:
     #tum_doviz_ve_altinlar_listesi = list(veri_kumesi.keys())
     #filtreli_doviz_listesi = [eleman for eleman in tum_doviz_ve_altinlar_listesi if eleman.endswith("TRY")]
     #filtreli_doviz_listesi = [eleman for eleman in filtreli_doviz_listesi if "RUB" not in eleman and "DKK" not in eleman and "BGN" not in eleman and "CNY" not in eleman and "JPY" not in eleman and "GUMUS" not in eleman]
-    filtreli_doviz_listesi = ['USDTRY', 'EURTRY', 'GBPTRY', 'SEKTRY', 'NOKTRY', 'CHFTRY', 'AUDTRY', 'JODTRY', 'CADTRY', 'OMRTRY', 'SARTRY', 'AEDTRY', 'QARTRY', 'KWDTRY', 'ILSTRY', 'MADTRY']
+    filtreli_doviz_listesi = ['USDTRY', 'EURTRY', 'GBPTRY', 'CHFTRY', 'SARTRY', 'AUDTRY', 'CADTRY']
+
 
     #filtreli_altin_listesi = [eleman for eleman in tum_doviz_ve_altinlar_listesi if eleman.find("USD") == -1 and eleman.find("ONS") == -1 and eleman.find("XAU") == -1 and eleman.find("EUR") == -1 and eleman.find("TRY") == -1]
-    filtreli_altin_listesi = ['ALTIN', 'AYAR14', 'AYAR22', 'KULCEALTIN', 'CEYREK_YENI', 'CEYREK_ESKI', 'YARIM_YENI', 'YARIM_ESKI', 'TEK_YENI', 'TEK_ESKI', 'ATA_YENI', 'ATA_ESKI', 'ATA5_YENI', 'ATA5_ESKI', 'GREMESE_YENI', 'GREMESE_ESKI']
+    filtreli_altin_listesi = ['ALTIN', 'AYAR14', 'AYAR22', 'KULCEALTIN', 'CEYREK_YENI', 'CEYREK_ESKI', 'YARIM_YENI', 'YARIM_ESKI', 'TEK_YENI', 'TEK_ESKI', 'GREMESE_YENI', 'GREMESE_ESKI']
+
     
     doviz_listesi, altin_listesi = {}, {}
 
@@ -235,3 +237,26 @@ def TabloyaKarEkle(orijinal_veri_tablosu:dict, kar_listesi:dict) -> dict:
         orijinal_veri_tablosu_kopya[eleman]["alis"] += kar_listesi[eleman]["alisa_eklenecek_kar_orani"]
 
     return orijinal_veri_tablosu_kopya
+
+
+
+
+def IsimleriDegistir(veri_tablosu:dict)-> dict:
+    veri_tablosu_kopya = veri_tablosu.copy()
+    veri_tablosu_kopya["ALTIN"]["code"] = "HAS"
+    veri_tablosu_kopya["AYAR14"]["code"] = "14 AYAR"
+    veri_tablosu_kopya["AYAR22"]["code"] = "22 AYAR"
+    veri_tablosu_kopya["KULCEALTIN"]["code"] = "GRAM ALTIN"
+    veri_tablosu_kopya["TEK_YENI"]["code"] = "TAM YENİ"
+    veri_tablosu_kopya["TEK_ESKI"]["code"] = "TAM ESKİ"
+    veri_tablosu_kopya["ATA_YENI"]["code"] = "REŞAT"
+    veri_tablosu_kopya["ATA5_YENI"]["code"] = "36 REŞAT"
+    veri_tablosu_kopya["CEYREK_ESKI"]["code"] = "ESKİ ÇEYREK"
+    veri_tablosu_kopya["CEYREK_YENI"]["code"] = "YENİ ÇEYREK"
+    veri_tablosu_kopya["YARIM_ESKI"]["code"] = "ESKİ YARIM"
+    veri_tablosu_kopya["YARIM_YENI"]["code"] = "YENİ YARIM"
+    veri_tablosu_kopya["GREMESE_ESKI"]["code"] = "ESKİ GREMESE"
+    veri_tablosu_kopya["GREMESE_YENI"]["code"] = "YENİ GREMESE"
+
+    
+    return veri_tablosu_kopya

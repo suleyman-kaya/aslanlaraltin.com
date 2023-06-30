@@ -1,23 +1,21 @@
 from flask import Flask, render_template, jsonify, request, redirect, json
-from VeriYoneticisi import VerileriCek, Verileri_Gruplara_Ayir, IstenenVeriyeKarEkle, TabloyaKarEkle, kar_listesi
+from VeriYoneticisi import VerileriCek, Verileri_Gruplara_Ayir, IstenenVeriyeKarEkle, TabloyaKarEkle, kar_listesi, IsimleriDegistir
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
     veri_kumesi = VerileriCek()
-    kar_eklenmis_veri = TabloyaKarEkle(veri_kumesi, kar_listesi)
+    isim_guncellenmis_tablo = IsimleriDegistir(veri_kumesi)
+    kar_eklenmis_veri = TabloyaKarEkle(isim_guncellenmis_tablo, kar_listesi)
     dovizler, altinlar = Verileri_Gruplara_Ayir(kar_eklenmis_veri)
     return render_template('index.html', dovizler=dovizler, altinlar=altinlar)
 
 @app.route('/update')
 def update():
     veri_kumesi = VerileriCek()
-    kar_eklenmis_veri = TabloyaKarEkle(veri_kumesi, kar_listesi)
-    
-    for eleman in kar_listesi:
-        print(kar_listesi[eleman])
-
+    isim_guncellenmis_tablo = IsimleriDegistir(veri_kumesi)
+    kar_eklenmis_veri = TabloyaKarEkle(isim_guncellenmis_tablo, kar_listesi)
     dovizler, altinlar = Verileri_Gruplara_Ayir(kar_eklenmis_veri)
     return jsonify(dovizler=dovizler, altinlar=altinlar)
 
