@@ -58,7 +58,7 @@ def Verileri_Gruplara_Ayir(veri_kumesi:dict) -> set:
     #tum_doviz_ve_altinlar_listesi = list(veri_kumesi.keys())
     #filtreli_doviz_listesi = [eleman for eleman in tum_doviz_ve_altinlar_listesi if eleman.endswith("TRY")]
     #filtreli_doviz_listesi = [eleman for eleman in filtreli_doviz_listesi if "RUB" not in eleman and "DKK" not in eleman and "BGN" not in eleman and "CNY" not in eleman and "JPY" not in eleman and "GUMUS" not in eleman]
-    filtreli_doviz_listesi = ['USDTRY', 'EURTRY', 'GBPTRY', 'CHFTRY', 'SARTRY', 'AUDTRY', 'CADTRY']
+    filtreli_doviz_listesi = ['USDTRY', 'EURTRY', 'GBPTRY', 'CHFTRY', 'SARTRY', 'AUDTRY', 'CADTRY', 'GUMUSTRY', 'ATA5_YENI', 'ATA_YENI']
 
 
     #filtreli_altin_listesi = [eleman for eleman in tum_doviz_ve_altinlar_listesi if eleman.find("USD") == -1 and eleman.find("ONS") == -1 and eleman.find("XAU") == -1 and eleman.find("EUR") == -1 and eleman.find("TRY") == -1]
@@ -226,7 +226,7 @@ kar_listesi = {
         "satisa_eklenecek_kar_orani": 0
     }
 }
-filtreli_doviz_listesi = ['USDTRY', 'EURTRY', 'GBPTRY', 'CHFTRY', 'SARTRY', 'AUDTRY', 'CADTRY']
+filtreli_doviz_listesi = ['USDTRY', 'EURTRY', 'GBPTRY', 'CHFTRY', 'SARTRY', 'AUDTRY', 'CADTRY', 'GUMUSTRY', 'ATA5_YENI', 'ATA_YENI']
 filtreli_altin_listesi = ['ALTIN', 'AYAR14', 'AYAR22', 'KULCEALTIN', 'CEYREK_YENI', 'CEYREK_ESKI', 'YARIM_YENI', 'YARIM_ESKI', 'TEK_YENI', 'TEK_ESKI', 'GREMESE_YENI', 'GREMESE_ESKI']
 kar_listesi = {k: v for k, v in kar_listesi.items() if k in filtreli_doviz_listesi + filtreli_altin_listesi}
 
@@ -260,6 +260,7 @@ def IsimleriDegistir(veri_tablosu:dict)-> dict:
     veri_tablosu_kopya["YARIM_YENI"]["code"] = "YENİ YARIM"
     veri_tablosu_kopya["GREMESE_ESKI"]["code"] = "ESKİ GREMESE"
     veri_tablosu_kopya["GREMESE_YENI"]["code"] = "YENİ GREMESE"
+    veri_tablosu_kopya["GUMUSTRY"]["code"] = "GÜMÜŞ"
 
     
     return veri_tablosu_kopya
