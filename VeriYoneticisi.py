@@ -227,7 +227,7 @@ kar_listesi = {
     }
 }
 filtreli_doviz_listesi = ['USDTRY', 'EURTRY', 'GBPTRY', 'CHFTRY', 'SARTRY', 'AUDTRY', 'CADTRY', 'GUMUSTRY', 'ATA5_YENI', 'ATA_YENI']
-filtreli_altin_listesi = ['ALTIN', 'AYAR14', 'AYAR22', 'KULCEALTIN', 'CEYREK_YENI', 'CEYREK_ESKI', 'YARIM_YENI', 'YARIM_ESKI', 'TEK_YENI', 'TEK_ESKI', 'GREMESE_YENI', 'GREMESE_ESKI']
+filtreli_altin_listesi = ['ALTIN', 'AYAR14', 'AYAR22', 'KULCEALTIN', 'CEYREK_ESKI', 'CEYREK_YENI', 'YARIM_ESKI', 'YARIM_YENI', 'TEK_ESKI','TEK_YENI', 'GREMESE_ESKI', 'GREMESE_YENI']
 kar_listesi = {k: v for k, v in kar_listesi.items() if k in filtreli_doviz_listesi + filtreli_altin_listesi}
 
 
@@ -250,8 +250,8 @@ def IsimleriDegistir(veri_tablosu:dict)-> dict:
     veri_tablosu_kopya["AYAR14"]["code"] = "14 AYAR"
     veri_tablosu_kopya["AYAR22"]["code"] = "22 AYAR"
     veri_tablosu_kopya["KULCEALTIN"]["code"] = "GRAM ALTIN"
-    veri_tablosu_kopya["TEK_YENI"]["code"] = "TAM YENİ"
-    veri_tablosu_kopya["TEK_ESKI"]["code"] = "TAM ESKİ"
+    veri_tablosu_kopya["TEK_YENI"]["code"] = "YENİ TAM"
+    veri_tablosu_kopya["TEK_ESKI"]["code"] = "ESKİ TAM"
     veri_tablosu_kopya["ATA_YENI"]["code"] = "REŞAT"
     veri_tablosu_kopya["ATA5_YENI"]["code"] = "36 REŞAT"
     veri_tablosu_kopya["CEYREK_ESKI"]["code"] = "ESKİ ÇEYREK"
