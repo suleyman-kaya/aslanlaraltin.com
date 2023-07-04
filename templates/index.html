@@ -208,7 +208,8 @@
                 <tbody>
                     {% for kod, veri in dovizler.items() %}
                     <tr>
-                        <td>{{ kod[:3] + '-' + kod[-3:] }}</td>
+                        <!--- kod[:3] + '-' + kod[-3:] --> 
+                        <td>{{ veri['code'] if veri['code'] in ['36 REŞAT', 'REŞAT', 'GÜMÜŞ'] else kod[:3] + '-' + kod[-3:] }}</td>
                         <td class="alis">{{ veri['alis'] }}</td>
                         <td class="satis">{{ veri['satis'] }}</td>
                     </tr>
@@ -254,7 +255,7 @@
                         })
                         .catch(error => console.log(error));
         }
-            
+
         function updateDovizTable(tableId, data) {
             const table = document.getElementById(tableId);
             const tbody = table.getElementsByTagName('tbody')[0];
@@ -263,7 +264,21 @@
             for (const row of rows) {
                 const alisCell = row.cells[1];  // Get the 'alis' cell (second cell)
                 const satisCell = row.getElementsByClassName('satis')[0];
-                const kod =row.cells[0].innerText.substring(0, 3) + row.cells[0].innerText.substring(4)
+                let kod;
+            
+                if (row.cells[0].innerText === '36 REŞAT') {
+                    kod = 'ATA5_YENI';
+                } else if (row.cells[0].innerText === 'REŞAT') {
+                    kod = 'ATA_YENI';
+                } else if (row.cells[0].innerText === 'GÜMÜŞ') {
+                    kod = 'GUMUSTRY';
+                } else {
+                    kod = row.cells[0].innerText.substring(0, 3) + row.cells[0].innerText.substring(4);
+                }
+
+                console.log(kod)
+                console.log(row.cells[0].innerText)
+            
                 const veri = data[kod];
             
                 const previousSatisValue = parseFloat(satisCell.dataset.previousValue);
@@ -287,11 +302,12 @@
             
                 satisCell.innerText = veri.satis;
                 satisCell.dataset.previousValue = veri.satis;
-
+            
                 alisCell.innerText = veri.alis;
                 alisCell.dataset.previousValue = veri.alis;
             }
         }
+
 
         function updateAltinTable(tableId, data) {
               const table = document.getElementById(tableId);
