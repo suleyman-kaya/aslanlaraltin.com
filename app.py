@@ -1,5 +1,5 @@
 from flask import Flask, render_template, jsonify, request, redirect, json
-from VeriYoneticisi import VerileriCek, Verileri_Gruplara_Ayir, IstenenVeriyeKarEkle, TabloyaKarEkle, kar_listesi, IsimleriDegistir
+from VeriYoneticisi import VerileriCek, Verileri_Gruplara_Ayir, IstenenVeriyeKarEkle, TabloyaKarEkle, kar_listesi, IsimleriDegistir, Alis_Satisin_Son_Uc_Hanesini_Gonder_Sadece
 
 app = Flask(__name__)
 
@@ -8,6 +8,7 @@ def index():
     veri_kumesi = VerileriCek()
     isim_guncellenmis_tablo = IsimleriDegistir(veri_kumesi)
     kar_eklenmis_veri = TabloyaKarEkle(isim_guncellenmis_tablo, kar_listesi)
+    kar_eklenmis_veri = Alis_Satisin_Son_Uc_Hanesini_Gonder_Sadece(kar_eklenmis_veri)
     dovizler, altinlar = Verileri_Gruplara_Ayir(kar_eklenmis_veri)
     return render_template('index.html', dovizler=dovizler, altinlar=altinlar)
 
@@ -16,6 +17,8 @@ def update():
     veri_kumesi = VerileriCek()
     isim_guncellenmis_tablo = IsimleriDegistir(veri_kumesi)
     kar_eklenmis_veri = TabloyaKarEkle(isim_guncellenmis_tablo, kar_listesi)
+    kar_eklenmis_veri = Alis_Satisin_Son_Uc_Hanesini_Gonder_Sadece(kar_eklenmis_veri)
+
     dovizler, altinlar = Verileri_Gruplara_Ayir(kar_eklenmis_veri)
     return jsonify(dovizler=dovizler, altinlar=altinlar)
 
