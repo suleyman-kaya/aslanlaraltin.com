@@ -263,3 +263,14 @@ def IsimleriDegistir(veri_tablosu:dict)-> dict:
 
     
     return veri_tablosu_kopya
+
+
+
+
+def Alis_Satisin_Son_Uc_Hanesini_Gonder_Sadece(orijinal_veri_tablosu:dict) -> dict:
+    orijinal_veri_tablosu_kopya = orijinal_veri_tablosu.copy()
+    for eleman in kar_listesi.keys():
+        orijinal_veri_tablosu_kopya[eleman]["satis"] = round(orijinal_veri_tablosu_kopya[eleman]["satis"], 3)
+        orijinal_veri_tablosu_kopya[eleman]["alis"] = round(orijinal_veri_tablosu_kopya[eleman]["alis"], 3)
+
+    return orijinal_veri_tablosu_kopya
