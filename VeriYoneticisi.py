@@ -55,13 +55,18 @@ def VerileriCek()->dict:
 
 
 def Verileri_Gruplara_Ayir(veri_kumesi:dict) -> set:
-    #tum_doviz_ve_altinlar_listesi = list(veri_kumesi.keys())
-    #filtreli_doviz_listesi = [eleman for eleman in tum_doviz_ve_altinlar_listesi if eleman.endswith("TRY")]
-    #filtreli_doviz_listesi = [eleman for eleman in filtreli_doviz_listesi if "RUB" not in eleman and "DKK" not in eleman and "BGN" not in eleman and "CNY" not in eleman and "JPY" not in eleman and "GUMUS" not in eleman]
+    """
+    Onceki kullanılan kodlar:
+    tum_doviz_ve_altinlar_listesi = list(veri_kumesi.keys())
+    filtreli_doviz_listesi = [eleman for eleman in tum_doviz_ve_altinlar_listesi if eleman.endswith("TRY")]
+    filtreli_doviz_listesi = [eleman for eleman in filtreli_doviz_listesi if "RUB" not in eleman and "DKK" not in eleman and "BGN" not in eleman and "CNY" not in eleman and "JPY" not in eleman and "GUMUS" not in eleman]
+    """
     filtreli_doviz_listesi = ['USDTRY', 'EURTRY', 'GBPTRY', 'CHFTRY', 'SARTRY', 'AUDTRY', 'CADTRY', 'GUMUSTRY', 'ATA5_YENI', 'ATA_YENI']
 
-
-    #filtreli_altin_listesi = [eleman for eleman in tum_doviz_ve_altinlar_listesi if eleman.find("USD") == -1 and eleman.find("ONS") == -1 and eleman.find("XAU") == -1 and eleman.find("EUR") == -1 and eleman.find("TRY") == -1]
+    """
+    Onceki kullanilan kodlar:
+    filtreli_altin_listesi = [eleman for eleman in tum_doviz_ve_altinlar_listesi if eleman.find("USD") == -1 and eleman.find("ONS") == -1 and eleman.find("XAU") == -1 and eleman.find("EUR") == -1 and eleman.find("TRY") == -1]
+    """
     filtreli_altin_listesi = ['ALTIN', 'AYAR14', 'AYAR22', 'KULCEALTIN', 'CEYREK_YENI', 'CEYREK_ESKI', 'YARIM_YENI', 'YARIM_ESKI', 'TEK_YENI', 'TEK_ESKI', 'GREMESE_YENI', 'GREMESE_ESKI']
 
     
@@ -78,154 +83,8 @@ def Verileri_Gruplara_Ayir(veri_kumesi:dict) -> set:
 
 
 
-def IstenenVeriyeKarEkle(tablo:dict, veri:str, alisa_mi_satisa_mi:str, eklenecek_kar_oranı:float) -> dict:
-    """
-    Inputs:
-        tablo: Tüm fiyatların tablosu
-        veri: Kar oranının ekleneceği veri
-        alisa_mi_satisa_mi: Kar alışa mı eklenecek satışa mı?
-        eklenecek_kar_oranı: Yüzde kaç kar eklenecek
-    
-    Outputs:
-        Seçilen verinin alış ya da satışına kar eklenmiş şekilde güncellenen tablo
-    """
-    tablo[veri][alisa_mi_satisa_mi]= tablo[veri][alisa_mi_satisa_mi] + (tablo[veri][alisa_mi_satisa_mi] * (eklenecek_kar_oranı/100))
-    return tablo
-
-
-
-
 global kar_listesi
-kar_listesi = {
-    "USDTRY": {
-        "alisa_eklenecek_kar_orani": 0,
-        "satisa_eklenecek_kar_orani": 0
-    },
-    "EURTRY": {
-        "alisa_eklenecek_kar_orani": 0,
-        "satisa_eklenecek_kar_orani": 0
-    },
-    "GBPTRY": {
-        "alisa_eklenecek_kar_orani": 0,
-        "satisa_eklenecek_kar_orani": 0
-    },
-    "SEKTRY": {
-        "alisa_eklenecek_kar_orani": 0,
-        "satisa_eklenecek_kar_orani": 0
-    },
-    "NOKTRY": {
-        "alisa_eklenecek_kar_orani": 0,
-        "satisa_eklenecek_kar_orani": 0
-    },
-    "CHFTRY": {
-        "alisa_eklenecek_kar_orani": 0,
-        "satisa_eklenecek_kar_orani": 0
-    },
-    "AUDTRY": {
-        "alisa_eklenecek_kar_orani": 0,
-        "satisa_eklenecek_kar_orani": 0
-    },
-    "JODTRY": {
-        "alisa_eklenecek_kar_orani": 0,
-        "satisa_eklenecek_kar_orani": 0
-    },
-    "CADTRY": {
-        "alisa_eklenecek_kar_orani": 0,
-        "satisa_eklenecek_kar_orani": 0
-    },
-    "OMRTRY": {
-        "alisa_eklenecek_kar_orani": 0,
-        "satisa_eklenecek_kar_orani": 0
-    },
-    "SARTRY": {
-        "alisa_eklenecek_kar_orani": 0,
-        "satisa_eklenecek_kar_orani": 0
-    },
-    "AEDTRY": {
-        "alisa_eklenecek_kar_orani": 0,
-        "satisa_eklenecek_kar_orani": 0
-    },
-    "QARTRY": {
-        "alisa_eklenecek_kar_orani": 0,
-        "satisa_eklenecek_kar_orani": 0
-    },
-    "KWDTRY": {
-        "alisa_eklenecek_kar_orani": 0,
-        "satisa_eklenecek_kar_orani": 0
-    },
-    "ILSTRY": {
-        "alisa_eklenecek_kar_orani": 0,
-        "satisa_eklenecek_kar_orani": 0
-    },
-    "MADTRY": {
-        "alisa_eklenecek_kar_orani": 0,
-        "satisa_eklenecek_kar_orani": 0
-    },
-    "ALTIN": {
-        "alisa_eklenecek_kar_orani": 0,
-        "satisa_eklenecek_kar_orani": 0
-    },
-    "AYAR14": {
-        "alisa_eklenecek_kar_orani": 0,
-        "satisa_eklenecek_kar_orani": 0
-    },
-    "AYAR22": {
-        "alisa_eklenecek_kar_orani": 0,
-        "satisa_eklenecek_kar_orani": 0
-    },
-    "KULCEALTIN": {
-        "alisa_eklenecek_kar_orani": 0,
-        "satisa_eklenecek_kar_orani": 0
-    },
-    "CEYREK_YENI": {
-        "alisa_eklenecek_kar_orani": 0,
-        "satisa_eklenecek_kar_orani": 0
-    },
-    "CEYREK_ESKI": {
-        "alisa_eklenecek_kar_orani": 0,
-        "satisa_eklenecek_kar_orani": 0
-    },
-    "YARIM_YENI": {
-        "alisa_eklenecek_kar_orani": 0,
-        "satisa_eklenecek_kar_orani": 0
-    },
-    "YARIM_ESKI": {
-        "alisa_eklenecek_kar_orani": 0,
-        "satisa_eklenecek_kar_orani": 0
-    },
-    "TEK_YENI": {
-        "alisa_eklenecek_kar_orani": 0,
-        "satisa_eklenecek_kar_orani": 0
-    },
-    "TEK_ESKI": {
-        "alisa_eklenecek_kar_orani": 0,
-        "satisa_eklenecek_kar_orani": 0
-    },
-    "ATA_YENI": {
-        "alisa_eklenecek_kar_orani": 0,
-        "satisa_eklenecek_kar_orani": 0
-    },
-    "ATA_ESKI": {
-        "alisa_eklenecek_kar_orani": 0,
-        "satisa_eklenecek_kar_orani": 0
-    },
-    "ATA5_YENI": {
-        "alisa_eklenecek_kar_orani": 0,
-        "satisa_eklenecek_kar_orani": 0
-    },
-    "ATA5_ESKI": {
-        "alisa_eklenecek_kar_orani": 0,
-        "satisa_eklenecek_kar_orani": 0
-    },
-    "GREMESE_YENI": {
-        "alisa_eklenecek_kar_orani": 0,
-        "satisa_eklenecek_kar_orani": 0
-    },
-    "GREMESE_ESKI": {
-        "alisa_eklenecek_kar_orani": 0,
-        "satisa_eklenecek_kar_orani": 0
-    }
-}
+kar_listesi = {"USDTRY":{"alisa_eklenecek_kar_orani":-0.15,"satisa_eklenecek_kar_orani":0.4},"EURTRY":{"alisa_eklenecek_kar_orani":-0.3,"satisa_eklenecek_kar_orani":0.15},"GBPTRY":{"alisa_eklenecek_kar_orani":-0.15,"satisa_eklenecek_kar_orani":0.2},"CHFTRY":{"alisa_eklenecek_kar_orani":-0.1,"satisa_eklenecek_kar_orani":0.2},"AUDTRY":{"alisa_eklenecek_kar_orani":-0.1,"satisa_eklenecek_kar_orani":0.1},"CADTRY":{"alisa_eklenecek_kar_orani":-0.1,"satisa_eklenecek_kar_orani":0.1},"SARTRY":{"alisa_eklenecek_kar_orani":-0.1,"satisa_eklenecek_kar_orani":0.1},"GUMUSTRY":{"alisa_eklenecek_kar_orani":-0.1,"satisa_eklenecek_kar_orani":0.2},"ALTIN":{"alisa_eklenecek_kar_orani":0.5,"satisa_eklenecek_kar_orani":-0.5},"AYAR14":{"alisa_eklenecek_kar_orani":-10,"satisa_eklenecek_kar_orani":0},"AYAR22":{"alisa_eklenecek_kar_orani":2,"satisa_eklenecek_kar_orani":-5},"KULCEALTIN":{"alisa_eklenecek_kar_orani":1,"satisa_eklenecek_kar_orani":-3},"CEYREK_YENI":{"alisa_eklenecek_kar_orani":20,"satisa_eklenecek_kar_orani":-20},"CEYREK_ESKI":{"alisa_eklenecek_kar_orani":10,"satisa_eklenecek_kar_orani":-10},"YARIM_YENI":{"alisa_eklenecek_kar_orani":10,"satisa_eklenecek_kar_orani":-20},"YARIM_ESKI":{"alisa_eklenecek_kar_orani":10,"satisa_eklenecek_kar_orani":-20},"TEK_YENI":{"alisa_eklenecek_kar_orani":30,"satisa_eklenecek_kar_orani":-40},"TEK_ESKI":{"alisa_eklenecek_kar_orani":30,"satisa_eklenecek_kar_orani":-40},"ATA_YENI":{"alisa_eklenecek_kar_orani":20,"satisa_eklenecek_kar_orani":-30},"ATA5_YENI":{"alisa_eklenecek_kar_orani":90,"satisa_eklenecek_kar_orani":-100},"GREMESE_YENI":{"alisa_eklenecek_kar_orani":50,"satisa_eklenecek_kar_orani":-70},"GREMESE_ESKI":{"alisa_eklenecek_kar_orani":50,"satisa_eklenecek_kar_orani":-70}}
 filtreli_doviz_listesi = ['USDTRY', 'EURTRY', 'GBPTRY', 'CHFTRY', 'SARTRY', 'AUDTRY', 'CADTRY', 'GUMUSTRY', 'ATA5_YENI', 'ATA_YENI']
 filtreli_altin_listesi = ['ALTIN', 'AYAR14', 'AYAR22', 'KULCEALTIN', 'CEYREK_ESKI', 'CEYREK_YENI', 'YARIM_ESKI', 'YARIM_YENI', 'TEK_ESKI','TEK_YENI', 'GREMESE_ESKI', 'GREMESE_YENI']
 kar_listesi = {k: v for k, v in kar_listesi.items() if k in filtreli_doviz_listesi + filtreli_altin_listesi}
@@ -236,8 +95,8 @@ kar_listesi = {k: v for k, v in kar_listesi.items() if k in filtreli_doviz_liste
 def TabloyaKarEkle(orijinal_veri_tablosu:dict, kar_listesi:dict) -> dict:
     orijinal_veri_tablosu_kopya = orijinal_veri_tablosu.copy()
     for eleman in kar_listesi.keys():
-        orijinal_veri_tablosu_kopya[eleman]["satis"] += kar_listesi[eleman]["satisa_eklenecek_kar_orani"]
-        orijinal_veri_tablosu_kopya[eleman]["alis"] += kar_listesi[eleman]["alisa_eklenecek_kar_orani"]
+        orijinal_veri_tablosu_kopya[eleman]["satis"] = round(orijinal_veri_tablosu_kopya[eleman]["satis"] + kar_listesi[eleman]["satisa_eklenecek_kar_orani"],3)
+        orijinal_veri_tablosu_kopya[eleman]["alis"] = round(orijinal_veri_tablosu_kopya[eleman]["alis"] + kar_listesi[eleman]["alisa_eklenecek_kar_orani"],3)
 
     return orijinal_veri_tablosu_kopya
 
@@ -268,10 +127,9 @@ def IsimleriDegistir(veri_tablosu:dict)-> dict:
 
 
 
-def Alis_Satisin_Son_Uc_Hanesini_Gonder_Sadece(orijinal_veri_tablosu:dict) -> dict:
-    orijinal_veri_tablosu_kopya = orijinal_veri_tablosu.copy()
-    for eleman in kar_listesi.keys():
-        orijinal_veri_tablosu_kopya[eleman]["satis"] = round(orijinal_veri_tablosu_kopya[eleman]["satis"], 3)
-        orijinal_veri_tablosu_kopya[eleman]["alis"] = round(orijinal_veri_tablosu_kopya[eleman]["alis"], 3)
-
-    return orijinal_veri_tablosu_kopya
+def VerCoskuyu():
+    veri_kumesi = VerileriCek()
+    isim_guncellenmis_tablo = IsimleriDegistir(veri_kumesi)
+    kar_eklenmis_veri = TabloyaKarEkle(isim_guncellenmis_tablo, kar_listesi)
+    dovizler, altinlar = Verileri_Gruplara_Ayir(kar_eklenmis_veri)
+    return (dovizler, altinlar)
