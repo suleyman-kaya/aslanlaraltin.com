@@ -11,7 +11,7 @@ def index():
 def update():
     dovizler, altinlar = VerCoskuyu()
     return jsonify(dovizler=dovizler, altinlar=altinlar)
-
+"""
 @app.route('/yonetici', methods=['GET', 'POST'])
 def yonetici():
     if request.method == 'POST':
@@ -44,7 +44,7 @@ def update_kar_listesi(veriler):
                 "alisa_eklenecek_kar_orani": kar_oranlari["alisa_eklenecek_kar_orani"],
                 "satisa_eklenecek_kar_orani": kar_oranlari["satisa_eklenecek_kar_orani"]
             }
-
+"""
 
 if __name__ == '__main__':
     app.run()
