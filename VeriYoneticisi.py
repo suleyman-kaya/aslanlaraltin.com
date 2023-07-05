@@ -1,8 +1,6 @@
 from urllib import request, parse
 import gzip, json
 
-global kar_listesi
-kar_listesi = {"USDTRY":{"alisa_eklenecek_kar_orani":-0.15,"satisa_eklenecek_kar_orani":0.4},"EURTRY":{"alisa_eklenecek_kar_orani":-0.3,"satisa_eklenecek_kar_orani":0.15},"GBPTRY":{"alisa_eklenecek_kar_orani":-0.15,"satisa_eklenecek_kar_orani":0.2},"CHFTRY":{"alisa_eklenecek_kar_orani":-0.1,"satisa_eklenecek_kar_orani":0.2},"AUDTRY":{"alisa_eklenecek_kar_orani":-0.1,"satisa_eklenecek_kar_orani":0.1},"CADTRY":{"alisa_eklenecek_kar_orani":-0.1,"satisa_eklenecek_kar_orani":0.1},"SARTRY":{"alisa_eklenecek_kar_orani":-0.1,"satisa_eklenecek_kar_orani":0.1},"GUMUSTRY":{"alisa_eklenecek_kar_orani":-0.1,"satisa_eklenecek_kar_orani":0.2},"ALTIN":{"alisa_eklenecek_kar_orani":0.5,"satisa_eklenecek_kar_orani":-0.5},"AYAR14":{"alisa_eklenecek_kar_orani":-10,"satisa_eklenecek_kar_orani":0},"AYAR22":{"alisa_eklenecek_kar_orani":2,"satisa_eklenecek_kar_orani":-5},"KULCEALTIN":{"alisa_eklenecek_kar_orani":1,"satisa_eklenecek_kar_orani":-3},"CEYREK_YENI":{"alisa_eklenecek_kar_orani":20,"satisa_eklenecek_kar_orani":-20},"CEYREK_ESKI":{"alisa_eklenecek_kar_orani":10,"satisa_eklenecek_kar_orani":-10},"YARIM_YENI":{"alisa_eklenecek_kar_orani":10,"satisa_eklenecek_kar_orani":-20},"YARIM_ESKI":{"alisa_eklenecek_kar_orani":10,"satisa_eklenecek_kar_orani":-20},"TEK_YENI":{"alisa_eklenecek_kar_orani":30,"satisa_eklenecek_kar_orani":-40},"TEK_ESKI":{"alisa_eklenecek_kar_orani":30,"satisa_eklenecek_kar_orani":-40},"ATA_YENI":{"alisa_eklenecek_kar_orani":20,"satisa_eklenecek_kar_orani":-30},"ATA5_YENI":{"alisa_eklenecek_kar_orani":90,"satisa_eklenecek_kar_orani":-100},"GREMESE_YENI":{"alisa_eklenecek_kar_orani":50,"satisa_eklenecek_kar_orani":-70},"GREMESE_ESKI":{"alisa_eklenecek_kar_orani":50,"satisa_eklenecek_kar_orani":-70}}
 
 
 def VerCoskuyu()->dict:
@@ -34,6 +32,10 @@ def VerCoskuyu()->dict:
     response = request.urlopen(req)
 
     if response.status == 200:
+        with open('kar_listesi.json', 'r') as file:
+            kar_listesi = json.load(file)
+
+
         if response.headers.get('Content-Encoding') == 'gzip':
             compressed_data = response.read()
             data = gzip.decompress(compressed_data)
@@ -96,6 +98,8 @@ def VerCoskuyu()->dict:
 
         for eleman in filtreli_altin_listesi:
             altin_listesi[eleman] = result[eleman]
+        
+        file.close()
 
         return (doviz_listesi, altin_listesi)
     

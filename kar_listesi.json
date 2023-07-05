@@ -1,0 +1,90 @@
+{
+    "ALTIN": {
+        "alisa_eklenecek_kar_orani": 0.5,
+        "satisa_eklenecek_kar_orani": -0.5
+    },
+    "ATA5_YENI": {
+        "alisa_eklenecek_kar_orani": 90,
+        "satisa_eklenecek_kar_orani": -100
+    },
+    "ATA_YENI": {
+        "alisa_eklenecek_kar_orani": 20,
+        "satisa_eklenecek_kar_orani": -30
+    },
+    "AUDTRY": {
+        "alisa_eklenecek_kar_orani": -0.1,
+        "satisa_eklenecek_kar_orani": 0.1
+    },
+    "AYAR14": {
+        "alisa_eklenecek_kar_orani": -10,
+        "satisa_eklenecek_kar_orani": 0
+    },
+    "AYAR22": {
+        "alisa_eklenecek_kar_orani": 2,
+        "satisa_eklenecek_kar_orani": -5
+    },
+    "CADTRY": {
+        "alisa_eklenecek_kar_orani": -0.1,
+        "satisa_eklenecek_kar_orani": 0.1
+    },
+    "CEYREK_ESKI": {
+        "alisa_eklenecek_kar_orani": 10,
+        "satisa_eklenecek_kar_orani": -10
+    },
+    "CEYREK_YENI": {
+        "alisa_eklenecek_kar_orani": 20,
+        "satisa_eklenecek_kar_orani": -20
+    },
+    "CHFTRY": {
+        "alisa_eklenecek_kar_orani": -0.1,
+        "satisa_eklenecek_kar_orani": 0.2
+    },
+    "EURTRY": {
+        "alisa_eklenecek_kar_orani": -0.3,
+        "satisa_eklenecek_kar_orani": 0.15
+    },
+    "GBPTRY": {
+        "alisa_eklenecek_kar_orani": -0.15,
+        "satisa_eklenecek_kar_orani": 0.2
+    },
+    "GREMESE_ESKI": {
+        "alisa_eklenecek_kar_orani": 50,
+        "satisa_eklenecek_kar_orani": -70
+    },
+    "GREMESE_YENI": {
+        "alisa_eklenecek_kar_orani": 50,
+        "satisa_eklenecek_kar_orani": -70
+    },
+    "GUMUSTRY": {
+        "alisa_eklenecek_kar_orani": -0.1,
+        "satisa_eklenecek_kar_orani": 0.2
+    },
+    "KULCEALTIN": {
+        "alisa_eklenecek_kar_orani": 1,
+        "satisa_eklenecek_kar_orani": -3
+    },
+    "SARTRY": {
+        "alisa_eklenecek_kar_orani": -0.1,
+        "satisa_eklenecek_kar_orani": 0.1
+    },
+    "TEK_ESKI": {
+        "alisa_eklenecek_kar_orani": 30,
+        "satisa_eklenecek_kar_orani": -40
+    },
+    "TEK_YENI": {
+        "alisa_eklenecek_kar_orani": 30,
+        "satisa_eklenecek_kar_orani": -40
+    },
+    "USDTRY": {
+        "alisa_eklenecek_kar_orani": -0.15,
+        "satisa_eklenecek_kar_orani": 0.4
+    },
+    "YARIM_ESKI": {
+        "alisa_eklenecek_kar_orani": 10,
+        "satisa_eklenecek_kar_orani": -20
+    },
+    "YARIM_YENI": {
+        "alisa_eklenecek_kar_orani": 10,
+        "satisa_eklenecek_kar_orani": -20
+    }
+}
