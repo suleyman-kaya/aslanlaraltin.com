@@ -5,4 +5,4 @@ Müşterimin benden isteği üzerine `https://www.haremaltin.com/` adresinden d�
 
 [Aslanlar Altın](https://aslanlaraltin.com)
 
-![Panel](resimler/ss.png)
+![Panel](ss.png)
