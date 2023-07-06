@@ -61,10 +61,43 @@ def VerCoskuyu()->dict:
             result[deger]["alis"] = float(result[deger]["alis"])
             result[deger]["satis"] = float(result[deger]["satis"])
         
-        # Şimdi kârı ekliyoruz.
+        # Şimdi döviz listesine kârı ekliyoruz.
         for eleman in kar_listesi.keys():
             result[eleman]["satis"] = round(result[eleman]["satis"] + kar_listesi[eleman]["satisa_eklenecek_kar_orani"],3)
             result[eleman]["alis"] = round(result[eleman]["alis"] + kar_listesi[eleman]["alisa_eklenecek_kar_orani"],3)
+
+        # Şimdi ise has altını referans alarak diğer altınların değerini çarpıp belirliyoruz
+        has_alis = result["ALTIN"]["alis"]
+        has_satis = result["ALTIN"]["satis"]
+        # Alışlar
+        result["AYAR14"]["alis"] = round(has_alis * 0.55, 3)
+        result["AYAR22"]["alis"] = round(has_alis * 0.912, 3)
+        result["KULCEALTIN"]["alis"] = round(has_alis * 0.995, 3)
+        result["TEK_YENI"]["alis"] = round(has_alis * 6.40, 3)
+        result["TEK_ESKI"]["alis"] = round(has_alis * 6.40, 3)
+        result["ATA_YENI"]["alis"] = round(has_alis * 6.42, 3)
+        result["ATA5_YENI"]["alis"] = round(has_alis * 32.8, 3)
+        result["CEYREK_ESKI"]["alis"] = round(has_alis * 1.60, 3)
+        result["CEYREK_YENI"]["alis"] = round(has_alis * 1.60, 3)
+        result["YARIM_ESKI"]["alis"] = round(has_alis * 3.20, 3)
+        result["YARIM_YENI"]["alis"] = round(has_alis * 3.20, 3)
+        result["GREMESE_ESKI"]["alis"] = round(has_alis * 16, 3)
+        result["GREMESE_YENI"]["alis"] = round(has_alis * 16, 3)
+        # Satışlar
+        result["AYAR14"]["satis"] = round(has_satis * 0.80, 3)
+        result["AYAR22"]["satis"] = round(has_satis * 0.960, 3)
+        result["KULCEALTIN"]["satis"] = round(has_satis * 1.005, 3)
+        result["TEK_YENI"]["satis"] = round(has_satis * 6.68, 3)
+        result["TEK_ESKI"]["satis"] = round(has_satis * 6.56, 3)
+        result["ATA_YENI"]["satis"] = round(has_satis * 7, 3)
+        result["ATA5_YENI"]["satis"] = round(has_satis * 34.7, 3)
+        result["CEYREK_ESKI"]["satis"] = round(has_satis * 1.64, 3)
+        result["CEYREK_YENI"]["satis"] = round(has_satis * 1.67, 3)
+        result["YARIM_ESKI"]["satis"] = round(has_satis * 3.28, 3)
+        result["YARIM_YENI"]["satis"] = round(has_satis * 3.34, 3)
+        result["GREMESE_ESKI"]["satis"] = round(has_satis * 16.40, 3)
+        result["GREMESE_YENI"]["satis"] = round(has_satis * 16.70, 3)
+        
 
         # Şimdi ise çeşitli birimlerin kodlarını değiştiriyoruz.
         result["ALTIN"]["code"] = "HAS"
