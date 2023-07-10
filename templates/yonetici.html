@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Giriş Sayfası</title>
+  <script>
+    function login() {
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+
+      if (username === "aslanlaraltin68**//--" && password === "YXNsYW5sYXJhbHRpbjY4KiovLy0t") {
+        alert("Giriş Başarılı!");
+        showAdminPage(); // Yönetici sayfasını görüntüleyen fonksiyon
+      } else {
+        alert("Kullanıcı adı veya şifre hatalı!");
+      }
+    }
+
+    function showAdminPage() {
+      document.getElementById("adminPage").style.display = "block";
+    }
+  </script>
+  <style>
+    #adminPage {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Giriş Sayfası</h1>
+  <form>
+    <label for="username">Kullanıcı Adı:</label>
+    <input type="text" id="username" required><br><br>
+
+    <label for="password">Şifre:</label>
+    <input type="password" id="password" required><br><br>
+
+    <input type="button" value="Giriş Yap" onclick="login()">
+  </form>
+
+  <div id="adminPage">
+    <h1>Yönetici Sayfası</h1>
+
+    <form id="karForm">
+        {% for doviz_altin, kar_oranlari in kar_listesi.items() %}
+        <label for="{{ doviz_altin }}_alis">{{ doviz_altin }} Alış'a eklenecek kar:</label>
+        <input type="number" id="{{ doviz_altin }}_alis" step="0.01" value="{{ kar_oranlari.alisa_eklenecek_kar_orani }}" required>
+        <br>
+
+        <label for="{{ doviz_altin }}_satis">{{ doviz_altin }} Satış'a eklenecek kar:</label>
+        <input type="number" id="{{ doviz_altin }}_satis" step="0.01" value="{{ kar_oranlari.satisa_eklenecek_kar_orani }}" required>
+        <br>
+        {% endfor %}
+
+        <button type="submit">Gönder</button>
+    </form>
+
+    <script>
+        var karForm = document.getElementById("karForm");
+
+        karForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            var kar_listesi = {};
+
+            {% for doviz_altin, kar_oranlari in kar_listesi.items() %}
+            kar_listesi["{{ doviz_altin }}"] = {
+                "alisa_eklenecek_kar_orani": parseFloat(document.getElementById("{{ doviz_altin }}_alis").value),
+                "satisa_eklenecek_kar_orani": parseFloat(document.getElementById("{{ doviz_altin }}_satis").value)
+            };
+            {% endfor %}
+
+            console.log(kar_listesi);
+
+            fetch('/yonetici', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(kar_listesi)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Server response:', data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+  </div>
+</body>
+</html>
+
