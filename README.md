@@ -1,8 +1,9 @@
 # aslanlaraltin.com
-Müşterimin benden isteği üzerine `https://www.haremaltin.com/` adresinden döviz verilerini çekip üstüne kâr koyarak bir websitesinde yayınlamak üzere tasarladığım Python uygulamasını görüntülüyorsunuz.
 
-`Flask` teknolojisini kullanarak `https://www.haremaltin.com/dashboard/ajax/doviz` adresinden istekte bulunup kar_listesi.json dosyasındaki kâr miktarlarınnı gelen fiyat verilerine ekleyip `Jinja2` kullnarak index.html dosyasını render etmek suretiyle sürekli olarak veri tablosunu güncelliyor ve `aslanlaraltin.com`'da kullanıcılara sunuyorum.
+You are viewing the Python application I designed to fulfill my client's request. The purpose of this application is to fetch exchange rate data from the `https://www.haremaltin.com/` address, add a profit margin, and publish it on a website.
 
-[Aslanlar Altın](https://aslanlaraltin.com)
+Making requests to `https://www.haremaltin.com/dashboard/ajax/doviz`, and then appending the profit amounts from the `kar_listesi.json` file to the incoming price data. Continuously updating the data table and present it to users on `aslanlaraltin.com` using `Flask` & `Jinja2`.
+
+Visit [Aslanlar Altın](https://aslanlaraltin.com) to see the live website.
 
 ![Panel](ss.png)
